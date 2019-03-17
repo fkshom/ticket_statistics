@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/css/iThing.min.css" type="text/css" />
+</head>
+<body>
+  <div id="slider"></div>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRangeSliderMouseTouch.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRangeSliderDraggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRangeSliderHandle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRangeSliderBar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRangeSliderLabel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRangeSlider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQDateRangeSliderHandle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQDateRangeSlider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRuler.min.js"></script>
+  <script>
+    //<!--
+      $("#slider").dateRangeSlider({
+  bounds:{
+    min: new Date(2012, 1, 1),
+    max: new Date(2012, 11, 31)
+  },
+  defaultValues:{
+    min: new Date(2012, 1, 1),
+    max: new Date(2012, 1, 31)
+  },  step:{
+    days: 1
+  }}).on("valuesChanging", function(e, data){
+  console.log("Something moved. min: " + data.values.min + " max: " + data.values.max);
+});
+    //-->
+    </script>
+</body>
+</html>
