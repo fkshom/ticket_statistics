@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/css/iThing.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+    type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/css/iThing.min.css"
+    type="text/css" />
 </head>
+
 <body>
+  <div class="slidecontainer" id="sliders">
+    <input type="range" min="-1" max="1" value="0" step="0.1" class="slider" id="slider_a">a : <span id="val_a">0</span><br/>
+    <input type="range" min="-1" max="1" value="0" step="0.1" class="slider" id="slider_b">b : <span id="val_b">0</span><br />
+    <input type="range" min="-1" max="1" value="0" step="0.1" class="slider" id="slider_c">c : <span id="val_c">0</span><br />
+  </div>
   <div id="slider"></div>
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
@@ -19,22 +28,71 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQDateRangeSliderHandle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQDateRangeSlider.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jQRangeSlider/5.7.2/jQRuler.min.js"></script>
+  <script src="https://js.cybozu.com/momentjs/2.14.1/moment.min.js"></script>
   <script>
     //<!--
-      $("#slider").dateRangeSlider({
-  bounds:{
-    min: new Date(2012, 1, 1),
-    max: new Date(2012, 11, 31)
-  },
-  defaultValues:{
-    min: new Date(2012, 1, 1),
-    max: new Date(2012, 1, 31)
-  },  step:{
-    days: 1
-  }}).on("valuesChanging", function(e, data){
-  console.log("Something moved. min: " + data.values.min + " max: " + data.values.max);
-});
+    //http://ghusse.github.io/jQRangeSlider/index.html
+    $("#slider").dateRangeSlider({
+      bounds: {
+        min: new Date(2012, 1, 1),
+        max: new Date(2012, 11, 31)
+      },
+      defaultValues: {
+        min: new Date(2012, 1, 1),
+        max: new Date(2012, 1, 31)
+      }, step: {
+        days: 1
+      }, formatter: function(val) {
+                        return moment(val).format("YYYY年M月");
+      }
+    }).on("valuesChanging", function (e, data) {
+      console.log("Something moved. min: " + data.values.min + " max: " + data.values.max);
+      //myChart.data.datasets[0].data = [Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)];
+      //myChart.update();
+    });
     //-->
-    </script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+  <canvas id="myChart"></canvas>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 </body>
+
 </html>
